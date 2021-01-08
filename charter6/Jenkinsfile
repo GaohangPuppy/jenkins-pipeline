@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    triggers {
+        GenericTrigger {
+            genericVariables: [
+                [key: 'ref', value: '$.ref']
+            ],
+            token: 'secret',
+            causeString: 'Triggered on $ref',
+            printContributedVariables: true,
+            printPostContent: true
+        }
+    }
+
+    stages {
+        stage('Study GenericTrigger') {
+            steps {
+                echo "$env.JOB_NAME"
+            }
+        }
+    }
+}
